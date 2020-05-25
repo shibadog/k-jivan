@@ -9,9 +9,9 @@
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.github.shibadog</groupId>
-  <artifactId>spring-boot-session</artifactId>
+  <artifactId>k-jivan</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>spring-boot-session</name>
+  <name>k-jivan</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>

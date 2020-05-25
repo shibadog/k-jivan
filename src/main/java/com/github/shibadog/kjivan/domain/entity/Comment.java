@@ -1,4 +1,4 @@
-package com.github.shibadog.springbootsession.domain.entity;
+package com.github.shibadog.kjivan.domain.entity;
 
 import lombok.Data;
 

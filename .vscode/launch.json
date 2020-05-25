@@ -12,9 +12,9 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-SpringBootSessionApplication<spring-boot-session>",
+            "name": "Debug (Launch)-KJivanApplication<spring-boot-session>",
             "request": "launch",
-            "mainClass": "com.github.shibadog.springbootsession.SpringBootSessionApplication",
+            "mainClass": "com.github.shibadog.kjivan.KJivanApplication",
             "projectName": "spring-boot-session"
         }
     ]

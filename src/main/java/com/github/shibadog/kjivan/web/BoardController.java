@@ -1,12 +1,12 @@
-package com.github.shibadog.springbootsession.web;
+package com.github.shibadog.kjivan.web;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import com.github.shibadog.springbootsession.domain.entity.Thread;
-import com.github.shibadog.springbootsession.domain.entity.Topic;
+import com.github.shibadog.kjivan.domain.entity.Thread;
+import com.github.shibadog.kjivan.domain.entity.Topic;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -5,15 +5,40 @@
 <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 </head>
 
 <body>
+    <nav class="level">
+        <p class="level-item has-text-centered">
+            <a class="link is-info">Home</a>
+        </p>
+        <p class="level-item has-text-centered">
+            <a class="link is-info">Menu</a>
+        </p>
+        <p class="level-item has-text-centered">
+            <b>けーじばん</b>
+        </p>
+        <p class="level-item has-text-centered">
+            <a class="link is-info">Reservations</a>
+        </p>
+        <p class="level-item has-text-centered">
+            <a class="link is-info">Contact</a>
+        </p>
+    </nav>
 
     <th:block layout:fragment="layout-content">
         <p>Default layout content</p>
     </th:block>
 
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>© All rights reserved by shibadog.</p>
+        </div>
+    </footer>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 
 </html>

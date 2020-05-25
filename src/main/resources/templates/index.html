@@ -1,18 +1,75 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" th:remove="tag" />
   <title>Insert title here</title>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" th:remove="tag"></script>
+  <style>
+    .topic-table {
+      width: 100%;
+    }
+    .tag {
+      margin: auto 2px;
+    }
+  </style>
 </head>
 
 <body>
   <div>
     <th:block layout:fragment="layout-content">
-      <p>これが本体</p>
+
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Topic List
+            </h1>
+            <h2 class="subtitle">
+              好きなトピックを選んでください
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <div class="columns is-mobile">
+        <div class="column is-10 is-offset-1">
+          <table class="table topic-table">
+            <thead>
+              <tr>
+                <th><abbr title="Number">#</abbr></th>
+                <th>Topic Name</th>
+                <th>tags</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="topic, meta : ${topics}">
+                <th th:text="${meta.count}">1</th>
+                <td><a href="./topics.html" th:href="@{./topics/{id}(id=${topic.id})}" th:text="${topic.name}">トピック名</td>
+                <td><span class="tag is-dark" th:each="tag : ${topic.tags}" th:text="${tag}">Dark</span>
+                </td>
+                <td th:text="${#temporals.format(topic.created, 'uuuu-MM-dd HH:mm:ss')}">2020-05-25</td>
+            </tbody>
+          </table>
+          <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous" title="This is the first page" disabled>Previous</a>
+            <a class="pagination-next">Next page</a>
+            <ul class="pagination-list">
+              <li>
+                <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 2">2</a>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 3">3</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </th:block>
   </div>
 </body>

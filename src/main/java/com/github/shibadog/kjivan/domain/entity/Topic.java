@@ -10,6 +10,7 @@ import lombok.Data;
 public class Topic {
     private final UUID id;
     private final String name;
+    private final String description;
     private final LocalDateTime created;
     private final Set<String> tags;
 }

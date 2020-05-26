@@ -10,6 +10,7 @@
     .topic-table {
       width: 100%;
     }
+
     .tag {
       margin: auto 2px;
     }
@@ -33,6 +34,47 @@
         </div>
       </section>
 
+      <div class="column is-mobile">
+        <div class="column is-10 is-offset-1 has-text-right">
+          <button class="button is-primary modal-button" data-target="modal-create" aria-haspopup="true">作成</button>
+        </div>
+        <div id="modal-create" class="modal" th:classappend="${hasError ? 'is-active' : ''}">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">トピック作成</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <form name="create" method="POST" th:action="@{/createTopic}" th:object="${createTopicForm}">
+                <div class="field">
+                  <label class="label">トピック名</label>
+                  <div class="control has-icons-right">
+                    <input name="name" class="input" type="text" placeholder="Topic Name" th:field="*{name}"
+                      th:classappend="${#fields.hasErrors('name') ? 'is-danger' : ''}">
+                      <span th:if="${#fields.hasErrors('name')}" class="icon is-small is-right has-text-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                      </span>
+                  </div>
+                  <p class="help is-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</p>
+                </div>
+                <div class="field">
+                  <label class="label">説明</label>
+                  <div class="control">
+                    <textarea name="description" class="textarea" placeholder="Description"
+                      th:field="*{description}"></textarea>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success" onclick="document.create.submit();">作成</button>
+              <button class="button">やめる</button>
+            </footer>
+          </div>
+        </div>
+      </div>
+
       <div class="columns is-mobile">
         <div class="column is-10 is-offset-1">
           <table class="table topic-table">
@@ -47,7 +89,8 @@
             <tbody>
               <tr th:each="topic, meta : ${topics}">
                 <th th:text="${meta.count}">1</th>
-                <td><a href="./topics.html" th:href="@{./topics/{id}(id=${topic.id})}" th:text="${topic.name}">トピック名</td>
+                <td><a href="./topics.html" th:href="@{./topics/{id}(id=${topic.id})}" th:text="${topic.name}">トピック名
+                </td>
                 <td><span class="tag is-dark" th:each="tag : ${topic.tags}" th:text="${tag}">Dark</span>
                 </td>
                 <td th:text="${#temporals.format(topic.created, 'uuuu-MM-dd HH:mm:ss')}">2020-05-25</td>

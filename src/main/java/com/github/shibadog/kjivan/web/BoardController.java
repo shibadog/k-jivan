@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.github.shibadog.kjivan.config.AppConfig;
 import com.github.shibadog.kjivan.domain.TopicsService;
 import com.github.shibadog.kjivan.domain.entity.Thread;
 import com.github.shibadog.kjivan.web.form.CreateTopicForm;
@@ -23,14 +24,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class BoardController {
+    private final AppConfig appConfig;
     private final TopicsService topicsService;
 
-    public BoardController(TopicsService topicsService) {
+    public BoardController(
+            TopicsService topicsService,
+            AppConfig appConfig) {
         this.topicsService = topicsService;
+        this.appConfig = appConfig;
     }
 
     @GetMapping({ "/", "" })
     public String index(Model model) {
+        model.addAttribute("clientId", appConfig.getClientId());
         model.addAttribute("topics", topicsService.fetchTopics());
 
         boolean hasError = true;
@@ -44,12 +50,14 @@ public class BoardController {
     }
 
     @PostMapping("/createTopic")
-    public String createTopic(@Validated CreateTopicForm form, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String createTopic(@Validated CreateTopicForm form, BindingResult result,
+            RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             topicsService.createTopic(form);
         } else {
             redirectAttributes.addFlashAttribute(form);
-            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + Conventions.getVariableName(form), result);
+            redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + Conventions.getVariableName(form),
+                    result);
         }
         return "redirect:/";
     }

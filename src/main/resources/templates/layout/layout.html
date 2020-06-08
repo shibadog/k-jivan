@@ -24,7 +24,36 @@
             <a class="link is-info">Reservations</a>
         </p>
         <p class="level-item has-text-centered">
-            <a class="link is-info">Contact</a>
+            <a class="link is-info modal-button" data-target="modal-login" aria-haspopup="true">Sign in</a>
+        <div id="modal-login" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Sign in</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <form name="sign-up" method="POST">
+                        <div class="field">
+                            <label class="label">ソーシャルアカウントでサインイン</label>
+                            <div class="control has-icons-right">
+                                <span class="yconnectLogin">Yahoo! JAPAN IDでログイン</span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">説明</label>
+                            <div class="control">
+                                <textarea name="description" class="textarea" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <footer class="modal-card-foot">
+                    <!-- <button class="button is-success" onclick="document.sign-up.submit();">作成</button>
+                    <button class="button">やめる</button> -->
+                </footer>
+            </div>
+        </div>
         </p>
     </nav>
 
@@ -36,10 +65,45 @@
         <div class="content has-text-centered">
             <p>© All rights reserved by shibadog.</p>
         </div>
+        <span class="yconnectLogin">Yahoo! JAPAN IDでログイン</span>
     </footer>
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer src="/main.js"></script>
+    <script type="text/javascript">
+        window.yconnectInit = function () {
+            YAHOO.JP.yconnect.Authorization.init({
+                button: {
+                    format: "image",
+                    type: "a",
+                    textType: "a",
+                    width: 196,
+                    height: 38,
+                    className: "yconnectLogin"
+                },
+                authorization: {
+                    clientId: /*[[${clientId}]]*/ "Foo",
+                    redirectUri: "http://localhost:8080/",
+                    scope: "openid",
+                    state: "state",
+                    nonce: "nonce",
+                    windowWidth: "500",
+                    windowHeight: "400"
+                },
+                onError: function (res) {
+                    // エラー発生時のコールバック関数
+                },
+                onCancel: function (res) {
+                    // 同意キャンセルされた時のコールバック関数
+                }
+            });
+        };
+        (function () {
+            var fs = document.getElementsByTagName("script")[0], s = document.createElement("script");
+            s.setAttribute("src", "https://s.yimg.jp/images/login/yconnect/auth/1.0.3/auth.js");
+            fs.parentNode.insertBefore(s, fs);
+        })();
+    </script>
 </body>
 
 </html>
